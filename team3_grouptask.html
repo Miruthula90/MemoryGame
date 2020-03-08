@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Color Game</title>
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+     <link rel="stylesheet" href="./memorygame.css">
+    <link href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bitter&display=swap" rel="stylesheet">
+
+</head>
+<body>
+<div class="div1" style="background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);width:100%;height:650px;">
+
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span id="failure"class="close">&times;</span>
+
+    <p id="modaldata">Incorrect.Please Try Again!!!</p>
+  </div>
+
+</div>
+<div style="font-family: 'Bitter', serif; font-size:50px"><marquee>MEMORY GAME</marquee></div>
+<div style="position:absolute;right:10px;top:0px;">
+    <img id="1" src="angry-birds.png" alt="aaaa">
+     <img id="2" src="angry-birds.png" alt="aaaa">
+     <img id="3" src="angry-birds.png" alt="aaaa">
+</div>
+    <div id="level1" class="levelclass">level 1</div>
+
+<div id ="level2" class="levelclass" style="top:40px;">level 2</div>
+
+<div id="level3" class="levelclass" style="top:80px;">level 3</div>
+
+
+<div>
+   <span id="dot1" class="dot" style="left:400px;" onclick="fooKey('dot1');"></span>
+<span id="dot2" class="dot" style="left:550px;" onclick="fooKey('dot2');"></span>
+<span id="dot3" class="dot" style="left:700px;" onclick="fooKey('dot3');"></span>
+<span id="dot4" class="dot" style="left:850px;" onclick="fooKey('dot4');"></span>
+</div>
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" >
+  <div class="btn-group mr-2 design" role="group" aria-label="First group">
+      <button id="1btn" type="button" class="btn btn-secondary" style="background-color:green" onclick="fooValue('green');"></button>
+    <button  id="2btn" type="button" class="btn btn-secondary" style="background-color:red" onclick="fooValue('red');"></button>
+    <button id="3btn" type="button" class="btn btn-secondary" style="background-color:orange" onclick="fooValue('orange');"></button>
+    <button id="4btn" type="button" class="btn btn-secondary" style="background-color:blue" onclick="fooValue('blue');"></button>
+      <button id="5btn" type="button" class="btn btn-secondary" style="background-color:yellow" onclick="fooValue('yellow');"></button>
+    <button id="6btn" type="button" class="btn btn-secondary" style="background-color:pink" onclick="fooValue('pink');"></button>
+    <button id="7btn" type="button" class="btn btn-secondary" style="background-color:violet" onclick="fooValue('violet');"></button>
+    <button id="8btn" type="button" class="btn btn-secondary" style="background-color:brown" onclick="fooValue('brown');"></button>
+  </div>
+</div>
+<div id="btnappend">
+    <button class="btn1" id="btn" onclick="checkobj();" style="visibility:true;">Check</button>
+    <button class="btn2" id="btn2" style="visibility:hidden" onclick="document.location.reload();">Restart Game</button>
+</div>
+    </div>
+</body>
+<script>
+var boolval=false;
+var level=1;
+var timedelay=3;
+var lifecount=3;
+var spanarr=[];
+var randomnum;
+var modal = document.getElementById("myModal");
+var span = document.getElementsByClassName("close")[0]; //gets the first element whose class is 'close'.
+var obj={};
+var lastclickedcircle="";
+var lastclickedcolor="";
+// declaring an array with multiple objects
+var arr=[
+{dot1:'green',dot2:'red',dot3:'orange',dot4:'blue'},
+{dot1:'brown',dot2:'violet',dot3:'pink',dot4:'yellow'},
+{dot1:'yellow',dot2:'green',dot3:'orange',dot4:'violet'},
+{dot1:'blue',dot2:'red',dot3:'orange',dot4:'green'},
+{dot1:'violet',dot2:'yellow',dot3:'brown',dot4:'pink'},
+{dot1:'orange',dot2:'blue',dot3:'green',dot4:'red'},
+{dot1:'pink',dot2:'brown',dot3:'red',dot4:'orange'},
+{dot1:'red',dot2:'green',dot3:'violet',dot4:'brown'}
+];
+
+
+//modal functionality
+function modeldisplay() {
+  modal.style.display = "block";
+}
+
+function spanclose()
+{
+ modal.style.display = "none";
+}
+//modal.onclick = function() {
+ // modal.style.display = "none";
+//}
+
+span.onclick = function() {
+  modal.style.display = "none";
+  let x=document.getElementById('modaldata').innerHTML;
+  if (x.includes('Success'))
+  {
+  setlevel();
+  }
+  else
+  {
+  life(boolval);
+  }
+}
+
+//window.onclick = function(event) {
+  //if (event.target == modal) {
+  //  modal.style.display = "none";
+ // }
+//}
+
+// function called on click of check button;
+function checkobj()
+{
+let obj1=arr[randomnum];
+let obj2=obj;
+if (JSON.stringify(obj1) === JSON.stringify(obj2))
+{
+boolval=true;
+document.getElementById('modaldata').innerHTML='Success!Completed Level '+level;
+modeldisplay();
+//setlevel();
+}
+else
+{
+boolval=false;
+document.getElementById('modaldata').innerHTML='Incorrect.Please Try Again!!!';
+modeldisplay();
+//life(boolval);
+}
+}
+
+function setlevel()
+{
+document.getElementById("level"+level.toString()).style.visibility='visible';
+level++;
+if (level>3)
+{
+document.getElementById('btn').disabled=true;
+document.getElementById('modaldata').innerHTML='Winner Winner Chicken Dinner!';
+modeldisplay();
+return;
+}
+timedelay--;
+randomnum=Math.floor(Math.random() * arr.length);
+circlecolor();
+timeout();
+}
+
+function life(val)
+{
+if (lifecount==0)
+{
+document.getElementById('btn').style.visibility='hidden';
+document.getElementById('btn2').style.visibility='visible';
+return;
+}
+if (val==false)
+{
+document.getElementById(lifecount.toString()).remove();
+lifecount--;
+if (lifecount>0)
+{
+randomnum=Math.floor(Math.random() * arr.length);
+refresh();
+circlecolor();
+timeout();
+}
+else
+{
+document.getElementById('modaldata').innerHTML='<h1 style="font-size:68px;">GAME OVER!</h1>';
+modeldisplay();
+document.getElementById('btn').style.visibility='hidden';
+document.getElementById('btn2').style.visibility='visible';
+}
+}
+}
+
+randomnum=Math.floor(Math.random() * arr.length);
+
+function circlecolor()
+{
+ Object.keys(arr[randomnum]).forEach((val)=>
+ {
+ spanarr.push(val);
+ let y=arr[randomnum][val];
+ //let x= document.getElementById(val);
+ //x.setAttribute('style','backgroundColor:'+y)
+ document.getElementById(val).style.backgroundColor=y;
+ } )
+}
+
+circlecolor();
+timeout();
+
+function refresh()
+{
+spanarr.forEach((e)=>
+{
+document.getElementById(e).style.backgroundColor='white';
+})
+}
+
+function timeout()
+{
+spanarr.forEach((e)=>
+{
+setTimeout(function(){ document.getElementById(e).style.backgroundColor='white';}, timedelay*1000);
+}
+)
+}
+
+
+function fooKey(clsname)
+{
+obj[clsname]="";
+console.log(obj);
+lastclickedcircle=clsname;
+}
+function fooValue(color)
+{
+obj[lastclickedcircle]=color;
+document.getElementById(lastclickedcircle).style.backgroundColor=color;
+console.log(obj);
+lastclickedcolor=color;
+}
+
+</script>
+</html>

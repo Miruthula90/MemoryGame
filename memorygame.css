@@ -1,0 +1,118 @@
+
+
+    .div1
+    {
+background-image: linear-gradient(red, yellow);
+    }
+         .dot
+        {
+        width:120px;
+        height:120px;
+        border-radius:50%;
+        position:absolute;
+        background-color:white;
+        border:1px solid;
+        left:600px;
+        top:100px;
+
+        }
+
+        .design
+        {
+        position:absolute;
+        left:500px;
+        top:400px;
+        height:50px;
+        width:400px;
+        }
+
+        .btn1 {
+  background-color: #FF0040; /* pink */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  position:absolute;
+        left:650px;
+        top:500px;
+        border-radius:5px;
+}
+
+        .btn2
+        {
+        background-color: #FF0040; /* pink */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+        position:absolute;
+        left:620px;
+        top:550px;
+        border-radius:5px;
+        }
+
+        img
+        {
+        height:50px;
+        width:50px;
+        }
+
+        .levelclass
+        {
+        position: absolute;
+        left:10px;
+        top:0px;
+        font-family: 'Bree Serif', serif ;font-size:30px;
+        visibility:hidden;
+        }
+
+        /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 370px;
+  top: 100px;
+  width: 660px; /* Full width */
+  height: 400px; /* Full height */
+  overflow: hidden; /* Enable scroll if needed */
+  background-color:transparent;
+  background-color:transparent; /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #6666ff;
+  margin: 20% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 85%; /* Could be more or less, depending on screen size */
+  height: 40%;
+   font-family: 'Pacifico', cursive;
+   font-size:40px;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  text-align:right;
+
+   font-family: 'Pacifico', cursive;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
